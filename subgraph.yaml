@@ -1,0 +1,71 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Rooms
+    network: mumbai
+    source:
+      address: "0xC24882EbB22D0bfa86fCbcb4cF08E0060ff59622"
+      abi: Rooms
+      startBlock: 33389066
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Rooms
+        - User
+        - Video
+      abis:
+        - name: Rooms
+          file: ./abis/Rooms.json
+      eventHandlers:
+        - event: RoomListed(uint256,address,uint256)
+          handler: handleRoomListed
+        - event: RoomMinted(uint256,address,string)
+          handler: handleRoomMinted
+        - event: RoomSold(uint256,address,address,uint256)
+          handler: handleRoomSold
+        - event: RoomUnlisted(uint256,address)
+          handler: handleRoomUnlisted
+        - event: VideoListed(uint256,address,uint256)
+          handler: handleVideoListed
+        - event: VideoMinted(uint256,address,string)
+          handler: handleVideoMinted
+        - event: VideoPublished(uint256,address,uint256)
+          handler: handleVideoPublished
+        - event: VideoSold(uint256,address,address,uint256)
+          handler: handleVideoSold
+        - event: VideoUnlisted(uint256,address)
+          handler: handleVideoUnlisted
+      file: ./src/rooms.ts
+  - kind: ethereum
+    name: SocialToken
+    network: mumbai
+    source:
+      address: "0xE6E73E2A6AB5023D38607dA57B09C4beb3647259"
+      abi: SocialToken
+      startBlock: 33389066
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - SocialTokenHoldings
+      abis:
+        - name: SocialToken
+          file: ./abis/SocialToken.json
+      eventHandlers:
+        - event: SocialTokenMinted(uint256,address,uint256)
+          handler: handleSocialTokenMinted
+        - event: SocialTokenLaunched(uint256,address,string,uint256)
+          handler: handleSocialTokenLaunched
+        - event: SocialTokenBought(uint256,address,address,uint256,uint256)
+          handler: handleSocialTokenBought
+        - event: SocialTokenListed(uint256,address,uint256,uint256)
+          handler: handleSocialTokenListed
+        - event: SocialTokenUnlisted(uint256,address,uint256)
+          handler: handleSocialTokenUnlisted
+      file: ./src/socialToken.ts

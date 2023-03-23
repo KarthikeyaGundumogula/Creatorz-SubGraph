@@ -1,0 +1,12 @@
+{
+  "mumbai": {
+    "Rooms": {
+      "address": "0xC24882EbB22D0bfa86fCbcb4cF08E0060ff59622",
+      "startBlock": 33389066
+    },
+    "SocialToken": {
+      "address": "0xE6E73E2A6AB5023D38607dA57B09C4beb3647259",
+      "startBlock": 33389066
+    }
+  }
+}

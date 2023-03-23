@@ -1,0 +1,58 @@
+type Rooms @entity {
+  id: ID!
+  RoomId: BigInt!
+  Owner: Bytes!
+  URI: String!
+  IsListed: Boolean!
+  Videos: [BigInt!]!
+  Price: BigInt!
+  BlockNumber: BigInt!
+  BlockTimestamp: BigInt!
+  TransactionHash: Bytes!
+}
+
+type Video @entity {
+  id: ID!
+  VideoId: BigInt!
+  Owner: Bytes!
+  URI: String!
+  IsListed: Boolean!
+  IsPublished: Boolean!
+  Price: BigInt!
+  Room: BigInt!
+  BlockNumber: BigInt!
+  BlockTimestamp: BigInt!
+  TransactionHash: Bytes!
+}
+
+type SocialTokenHolding @entity {
+  id: ID!
+  SocialTokenId: BigInt!
+  Creator: Bytes!
+  Holder: Bytes!
+  IsLaunched: Boolean!
+  URI: String!
+  LaunchingPrice: BigInt!
+  TotalAmountMinted: BigInt!
+  AmountAvailbleforSale: BigInt!
+  AmountOwnedByHolder: BigInt!
+  AmountListedByHolder: BigInt!
+  PriceSetByHolder: BigInt!
+  BlockNumber: BigInt!
+  BlockTimestamp: BigInt!
+  TransactionHash: Bytes!
+}
+
+type User @entity {
+  id: String!
+  Address: Bytes!
+  RoomsOwned: [BigInt!]!
+  SocialTokensOwned: [BigInt!]!
+  VideosOwned: [BigInt!]!
+  TotalEarningByRooms: BigInt!
+  TotalEarningBySocialTokens: BigInt!
+  TotalEarningByVideos: BigInt!
+  BlockNumber: BigInt!
+  BlockTimestamp: BigInt!
+  TransactionHash: Bytes!
+}
