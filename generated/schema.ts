@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Rooms extends Entity {
+export class Room extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class Rooms extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Rooms entity without an ID");
+    assert(id != null, "Cannot save Room entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type Rooms must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Room must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("Rooms", id.toString(), this);
+      store.set("Room", id.toString(), this);
     }
   }
 
-  static load(id: string): Rooms | null {
-    return changetype<Rooms | null>(store.get("Rooms", id));
+  static load(id: string): Room | null {
+    return changetype<Room | null>(store.get("Room", id));
   }
 
   get id(): string {

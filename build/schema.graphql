@@ -1,4 +1,4 @@
-type Rooms @entity {
+type Room @entity {
   id: ID!
   RoomId: BigInt!
   Owner: Bytes!

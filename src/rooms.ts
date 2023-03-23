@@ -10,10 +10,11 @@ import {
   VideoSold as VideoSoldEvent,
   VideoUnlisted as VideoUnlistedEvent,
 } from "../generated/Rooms/Rooms";
-import { User, Rooms, Video } from "../generated/schema";
+import { User, Room, Video } from "../generated/schema";
 
 export function handleRoomMinted(event: RoomMintedEvent): void {
-  let room = new Rooms(event.params.id.toString());
+  let room = new Room(event.params.id.toString());
+  room.id = event.params.id.toString();
   room.Owner = event.params.owner;
   room.RoomId = event.params.id;
   room.URI = event.params.URI;
@@ -45,7 +46,7 @@ export function handleRoomMinted(event: RoomMintedEvent): void {
 }
 
 export function handleRoomListed(event: RoomListedEvent): void {
-  let room = Rooms.load(event.params.id.toString());
+  let room = Room.load(event.params.id.toString());
   if (room != null) {
     room.IsListed = true;
     room.Price = event.params.price;
@@ -54,7 +55,7 @@ export function handleRoomListed(event: RoomListedEvent): void {
 }
 
 export function handleRoomSold(event: RoomSoldEvent): void {
-  let room = Rooms.load(event.params.id.toString());
+  let room = Room.load(event.params.id.toString());
   if (room != null) {
     room.IsListed = false;
     room.Owner = event.params.buyer;
@@ -95,7 +96,7 @@ export function handleRoomSold(event: RoomSoldEvent): void {
 }
 
 export function handleRoomUnlisted(event: RoomUnlistedEvent): void {
-  let room = Rooms.load(event.params.id.toString());
+  let room = Room.load(event.params.id.toString());
   if (room != null) {
     room.IsListed = false;
     room.save();
@@ -142,7 +143,7 @@ export function handleVideoPublished(event: VideoPublishedEvent): void {
     video.IsPublished = true;
     video.save();
   }
-  let room = Rooms.load(event.params.RoomId.toString());
+  let room = Room.load(event.params.RoomId.toString());
   if (room != null) {
     let Videos = room.Videos;
     Videos.push(event.params.id);
